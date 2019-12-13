@@ -34,7 +34,4 @@ do
 		docker push $DOCKER_IMAGE_NAME:$TRAVIS_TAG-gcc-arm-none-eabi-$GCC_ARM_VERSION
 	fi
 done
-# Push latest
-if [ ! -z "$TRAVIS_TAG" ]; then
-	docker push $DOCKER_IMAGE_NAME
-fi
+
