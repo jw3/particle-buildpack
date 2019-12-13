@@ -1,10 +1,12 @@
 #!/bin/bash
 
-GCC_ARM_VERSIONS=( "5_3-2016q1" )
+GCC_ARM_VERSIONS=( "5_3-2016q1" "7-2017-q4-major" "8-2019-q3-update" )
 GCC_5_3_2016q1_CHECKSUM="5a261cac18c62d8b7e8c70beba2004bd"
 GCC_5_3_2016q1_URL="https://launchpad.net/gcc-arm-embedded/5.0/5-2016-q1-update/+download/gcc-arm-none-eabi-5_3-2016q1-20160330-linux.tar.bz2"
-GCC_8_3_2019q3_CHECKSUM="6341f11972dac8de185646d0fbd73bfc"
-GCC_8_3_2019q3_URL="https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/8-2019q3/RC1.1/gcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2"
+GCC_7_2017_q4_major_CHECKSUM="d3b00ae09e847747ef11316a8b04989a"
+GCC_7_2017_q4_major_URL="https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/7-2017q4/gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2"
+GCC_8_2019_q3_update_CHECKSUM="6341f11972dac8de185646d0fbd73bfc"
+GCC_8_2019_q3_update_URL="https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/8-2019q3/RC1.1/gcc-arm-none-eabi-8-2019-q3-update-linux.tar.bz2"
 
 CMAKE_VERSION="3.13.0"
 CMAKE_URL="https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.sh"
@@ -20,7 +22,7 @@ do
 	GCC_ARM_CHECKSUM_VAR=GCC_$(echo $version | tr '-' '_')_CHECKSUM
 	GCC_ARM_CHECKSUM="${!GCC_ARM_CHECKSUM_VAR}"
 	echo "Building $GCC_ARM_VERSION from $GCC_ARM_URL ..."
-	docker build -t $DOCKER_IMAGE_NAME \
+	docker build --no-cache -t $DOCKER_IMAGE_NAME \
 --build-arg GCC_ARM_URL="$GCC_ARM_URL" \
 --build-arg GCC_ARM_CHECKSUM="$GCC_ARM_CHECKSUM" \
 --build-arg GCC_ARM_VERSION="$GCC_ARM_VERSION" \
