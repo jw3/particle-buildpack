@@ -11,13 +11,14 @@ RUN echo 'deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main' > /etc
 
 RUN dpkg --add-architecture i386 \
   && apt-get update -q && apt-get install -qy \
-     python3.6 \
      bzip2 \
      isomd5sum \
      jq \
      libarchive-zip-perl \
      libc6:i386 \
      make \
+     nano \
+     python3.6 \
      vim-common \
      zip \
   && curl -o /tmp/cmake_install.sh -sSL ${CMAKE_URL} \
