@@ -5,6 +5,10 @@ ARG GCC_ARM_CHECKSUM
 ARG GCC_ARM_VERSION
 ARG CMAKE_URL
 
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key BA6932366A755776
+RUN echo 'deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main' > /etc/apt/sources.list.d/python.list \
+ && echo 'deb-src http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main' >> /etc/apt/sources.list.d/python.list
+
 RUN dpkg --add-architecture i386 \
   && apt-get update -q && apt-get install -qy \
      bzip2 \
@@ -13,8 +17,11 @@ RUN dpkg --add-architecture i386 \
      libarchive-zip-perl \
      libc6:i386 \
      make \
+     nano \
+     python3.6 \
      vim-common \
      zip \
+  && curl https://bootstrap.pypa.io/get-pip.py | python3.6 \
   && curl -o /tmp/cmake_install.sh -sSL ${CMAKE_URL} \
   && chmod +x /tmp/cmake_install.sh \
   && /tmp/cmake_install.sh --skip-license --prefix=/usr/local \
@@ -25,6 +32,8 @@ RUN dpkg --add-architecture i386 \
   && mv /usr/local/gcc-arm-none-eabi-${GCC_ARM_VERSION}/ /usr/local/gcc-arm-embedded \
   && apt-get remove -qy bzip2 && apt-get clean && apt-get purge \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/local/gcc-arm-embedded/share
+
+RUN pip install conan --no-cache-dir
 
 ENV PATH /usr/local/gcc-arm-embedded/bin:$PATH
 COPY bin /bin
