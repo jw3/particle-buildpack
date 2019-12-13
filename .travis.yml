@@ -2,7 +2,7 @@ sudo: required
 services:
   - docker
 env:
-  - DOCKER_IMAGE_NAME=particle/buildpack-hal
+  - DOCKER_IMAGE_NAME=jwiii/particle-buildpack
 install:
   - docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 script:
