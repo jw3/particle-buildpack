@@ -5,8 +5,13 @@ ARG GCC_ARM_CHECKSUM
 ARG GCC_ARM_VERSION
 ARG CMAKE_URL
 
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key BA6932366A755776
+RUN echo 'deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main' > /etc/apt/sources.list.d/python.list \
+ && echo 'deb-src http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main' >> /etc/apt/sources.list.d/python.list
+
 RUN dpkg --add-architecture i386 \
   && apt-get update -q && apt-get install -qy \
+     python3.6 \
      bzip2 \
      isomd5sum \
      jq \
