@@ -33,5 +33,7 @@ RUN dpkg --add-architecture i386 \
   && apt-get remove -qy bzip2 && apt-get clean && apt-get purge \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/local/gcc-arm-embedded/share
 
+RUN pip install conan --no-cache-dir
+
 ENV PATH /usr/local/gcc-arm-embedded/bin:$PATH
 COPY bin /bin
