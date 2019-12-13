@@ -22,7 +22,7 @@ do
 	GCC_ARM_CHECKSUM_VAR=GCC_$(echo $version | tr '-' '_')_CHECKSUM
 	GCC_ARM_CHECKSUM="${!GCC_ARM_CHECKSUM_VAR}"
 	echo "Building $GCC_ARM_VERSION from $GCC_ARM_URL ..."
-	docker build -t $DOCKER_IMAGE_NAME \
+	docker build --no-cache -t $DOCKER_IMAGE_NAME \
 --build-arg GCC_ARM_URL="$GCC_ARM_URL" \
 --build-arg GCC_ARM_CHECKSUM="$GCC_ARM_CHECKSUM" \
 --build-arg GCC_ARM_VERSION="$GCC_ARM_VERSION" \
